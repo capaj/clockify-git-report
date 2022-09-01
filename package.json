@@ -1,0 +1,30 @@
+{
+  "name": "clockify-git-report",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "ts": "tsc"
+  },
+  "bin": {
+    "clockify-git-report": "bin.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.7.13",
+    "typescript": "^4.8.2",
+    "vitest": "^0.22.1"
+  },
+  "dependencies": {
+    "clockify-ts": "^1.2107.12",
+    "dayjs": "^1.11.5",
+    "dotenv": "^16.0.2",
+    "execa": "^6.1.0",
+    "ts-node": "^10.9.1",
+    "yaml": "^2.1.1"
+  }
+}
