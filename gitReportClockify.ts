@@ -3,10 +3,12 @@ import { getCommitsForSubdirectories } from './getCommitsForSubdirectories'
 import 'dotenv/config'
 import Clockify from './clockify'
 import YAML from 'yaml'
+import parseArgs from 'minimist'
 
+const argv = parseArgs(process.argv.slice(2))
 const clockify = new Clockify(process.env.API_KEY as string)
 
-const commits = await getCommitsForSubdirectories(Number(process.argv[2]))
+const commits = await getCommitsForSubdirectories(argv.w || argv.week)
 
 const byDays: {
   folder: string
@@ -54,20 +56,24 @@ const days = Array.from(daysWithCommits).map((day) => {
 
 // console.log(JSON.stringify(days, null, 2))
 
-for (const dayWithCommits of days) {
-  await clockify.workspace
-    .withId(process.env.WORKSPACE_ID as string)
-    .timeEntries.post({
-      projectId: process.env.PROJECT_ID as string,
-      start: new Date(`${dayWithCommits.day}T07:00:00Z`),
-      end: new Date(`${dayWithCommits.day}T15:00:00Z`),
-      tagIds: [],
-      taskId: '',
-      description: dayWithCommits.description,
-      billable: true
-    })
+if (argv.out === 'json' || !argv.out) {
+  console.log(JSON.stringify(days, null, 2))
+} else if (argv.out === 'clockify') {
+  for (const dayWithCommits of days) {
+    await clockify.workspace
+      .withId(process.env.WORKSPACE_ID as string)
+      .timeEntries.post({
+        projectId: process.env.PROJECT_ID as string,
+        start: new Date(`${dayWithCommits.day}T07:00:00Z`),
+        end: new Date(`${dayWithCommits.day}T15:00:00Z`),
+        tagIds: [],
+        taskId: '',
+        description: dayWithCommits.description,
+        billable: true
+      })
 
-  console.log(`posted ${dayWithCommits.day} to clockify`)
+    console.log(`posted ${dayWithCommits.day} to clockify`)
+  }
+
+  console.log(`added ${days.length} day entries to clockify`)
 }
-
-console.log(`added ${days.length} day entries to clockify`)
