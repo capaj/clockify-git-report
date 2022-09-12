@@ -24,8 +24,16 @@ clockify-git-report -w 2 --out clockify # for week before previous
 ...
 ```
 
-to write the output to the terminal as json instead of pushing it to clockify do
+to write the output to the terminal as
+
+- json instead of pushing it to clockify do
 
 ```
 clockify-git-report -w 1 --out json
+```
+
+- yaml
+
+```
+clockify-git-report -w 1 --out yaml
 ```

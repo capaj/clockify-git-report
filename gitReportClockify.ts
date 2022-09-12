@@ -59,6 +59,8 @@ const days = Array.from(daysWithCommits).map((day) => {
 
 if (argv.out === 'json' || !argv.out) {
   console.log(JSON.stringify(days, null, 2))
+} else if (argv.out === 'yaml') {
+  console.log(YAML.stringify(days))
 } else if (argv.out === 'clockify') {
   for (const dayWithCommits of days) {
     await clockify.workspace
