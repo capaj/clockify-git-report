@@ -6,6 +6,7 @@ import YAML from 'yaml'
 import parseArgs from 'minimist'
 
 const argv = parseArgs(process.argv.slice(2))
+
 const clockify = new Clockify(process.env.API_KEY as string)
 
 const commits = await getCommitsForSubdirectories(argv.w || argv.week)

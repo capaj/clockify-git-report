@@ -10,7 +10,7 @@ spawnSync(
     '--experimental-specifier-resolution=node',
     '--transpileOnly',
     path.join(__dirname, 'gitReportClockify.ts'),
-    process.argv[2]
+    ...process.argv.slice(2)
   ],
   {
     stdio: 'inherit'

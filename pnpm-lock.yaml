@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/minimist': ^1.2.2
   '@types/node': ^18.7.16
   clockify-ts: ^1.2107.12
   dayjs: ^1.11.5
@@ -22,6 +23,7 @@ dependencies:
   yaml: 2.1.1
 
 devDependencies:
+  '@types/minimist': 1.2.2
   '@types/node': 18.7.16
   typescript: 4.8.3
   vitest: 0.23.2
@@ -84,6 +86,10 @@ packages:
 
   /@types/chai/4.3.3:
     resolution: {integrity: sha512-hC7OMnszpxhZPduX+m+nrx+uFoLkWOMiR4oa/AZF3MuSETYTZmFfJAHqZEM8MVlvfG7BEUcgvtwoCTxBp6hm3g==}
+    dev: true
+
+  /@types/minimist/1.2.2:
+    resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
   /@types/node/18.7.16:
