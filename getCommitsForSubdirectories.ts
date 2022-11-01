@@ -12,7 +12,8 @@ const seenRepos = new Set()
  *
  * @param weeksAgo 0 is this week, 1 is last week, etc.
  */
-export const getCommitsForSubdirectories = async (weeksAgo: number) => {
+export const getCommitsForSubdirectories = async (weeksAgo: number = 0) => {
+  console.log('weeksAgo', weeksAgo)
   const hashmapWithCommits = {} as Record<
     string,
     {
@@ -42,14 +43,25 @@ export const getCommitsForSubdirectories = async (weeksAgo: number) => {
         cwd: key
       })
       if (seenRepos.has(gitRemote.stdout)) {
-        console.warn('skipping', key)
+        console.warn('we already visited this repository:', key)
 
         continue
       }
+      await execa('git', ['fetch'], {
+        cwd: key
+      })
+
       seenRepos.add(gitRemote.stdout)
-    } catch (err) {
-      console.warn('skipping', key)
-      continue
+    } catch (err: unknown) {
+      if (
+        err instanceof Error &&
+        err.message.includes('fatal: not a git repository')
+      ) {
+        console.log('not a git repository:', key)
+        continue
+      }
+
+      throw err
     }
     console.log(`reading commits for ${key}`)
 

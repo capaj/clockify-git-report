@@ -12,11 +12,10 @@ export default class ClockifyError extends Error {
        * status code that falls out of the range of 2xx
        */
       const statusCode = error.response.status
+      const data = error.response.data as any
       message = `Response Error[${requestMethod}:${statusCode}]: ${getReasonPhrase(
         statusCode
-      )}. Message: ${error.response.data.message}. Resource: ${
-        error.response.data.path
-      }`
+      )}. Message: ${data?.message}. Resource: ${data?.path}`
     } else if (error.request) {
       /*
        * The request was made but no response was received, `error.request`
