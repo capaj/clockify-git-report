@@ -38,7 +38,7 @@ clockify-git-report -w 1 --out json
 clockify-git-report -w 1 --out yaml
 ```
 
-this is the sample yaml output:
+this is the sample yaml output for a folder with two repos:
 ```yaml
 - day: 2022-11-20
   description: |
